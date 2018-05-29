@@ -1,1 +1,13 @@
-<h1>Hello World</h1>
+<?php
+if($_SERVER['HTTP_CONNECTION'] === 'keep-alive'){
+	$redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $redirect);
+    exit();
+}
+require __DIR__.'/../vendor/autoload.php';
+
+use includes\Loader;
+
+$loader = new Loader;
+$loader->catchRequest();
